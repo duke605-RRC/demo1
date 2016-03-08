@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gson Demo</string>
+    <string name="index">Index</string>
+    <string name="get_mod">Get Mod</string>
 </resources>

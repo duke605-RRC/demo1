@@ -3,6 +3,7 @@ package io.github.duke605.gsondemo.task;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -11,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import io.github.duke605.gsondemo.MainActivity;
 import io.github.duke605.gsondemo.Mod;
 import io.github.duke605.gsondemo.R;
 
@@ -19,9 +21,9 @@ import io.github.duke605.gsondemo.R;
  */
 public class TaskReadApi extends AsyncTask<String, Void, String> {
 
-    private Activity activity;
+    private MainActivity activity;
 
-    public TaskReadApi(Activity activity) {
+    public TaskReadApi(MainActivity activity) {
         this.activity = activity;
     }
 
@@ -30,7 +32,11 @@ public class TaskReadApi extends AsyncTask<String, Void, String> {
         Gson gson = new Gson();
 
         Mod[] mods = gson.fromJson(s, Mod[].class);
-        ((TextView)activity.findViewById(R.id.num_mods)).setText(mods[0].name);
+        activity.mods = mods;
+        activity.numMods.setText("" + mods.length);
+        activity.button.setEnabled(true);
+        activity.index.setEnabled(true);
+        Toast.makeText(activity, "Fetched mods from API", Toast.LENGTH_LONG).show();
     }
 
     @Override
